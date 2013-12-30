@@ -1,0 +1,3 @@
+#!/usr/bin/env ruby
+require 'wpscaffold/cli'
+Wpscaffold::CLI.start

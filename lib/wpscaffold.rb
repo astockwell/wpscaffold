@@ -1,5 +1,5 @@
 require "wpscaffold/version"
+require "wpscaffold/controller"
 
 module Wpscaffold
-  # Your code goes here...
 end
