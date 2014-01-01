@@ -19,5 +19,8 @@ module Wpscaffold
 				}
 			end
 		end
+
+		# Alias the class
+		TField = TextField
 	end
 end

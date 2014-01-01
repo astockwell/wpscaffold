@@ -3,6 +3,11 @@ require 'wpscaffold'
 module Wpscaffold
 	module ACF
 		class RepeaterField < Field
+
+			def get_field_info
+				ask("\nWhat are the child fields for #{@raw}? ", Array)
+			end
+
 			def to_php
 				%q[<?php <%= variable %> = <%= get_field %>; if (<%= variable %>): ?>
 	<?php foreach(<%= variable %> as <%= variable + EACHERATOR %>): ?>
@@ -11,6 +16,7 @@ module Wpscaffold
 	<?php endforeach; ?>
 <?php endif; ?>]
 			end
+
 			def to_xml
 				{
 					# "sub_fields" => [
