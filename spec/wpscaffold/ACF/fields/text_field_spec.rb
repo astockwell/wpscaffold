@@ -2,9 +2,9 @@ require 'spec_helper'
 
 describe Wpscaffold::ACF::TextField do
 	before :all do
-		@text_field = Wpscaffold::ACF::TextField.new( "name:text", formatting: "crazy" )
+		@text_field = Wpscaffold::ACF::TextField.new( "name", [], formatting: "crazy" )
 		# Test class alias as well
-		@t_field = Wpscaffold::ACF::TField.new( "name:t", formatting: "crazy" )
+		@t_field = Wpscaffold::ACF::TField.new( "name", [], formatting: "crazy" )
 	end
 
 	describe '#new' do
@@ -29,7 +29,7 @@ describe Wpscaffold::ACF::TextField do
 			expect(@t_field.to_xml['formatting']).to eq "crazy"
 		end
 		it "allows options to be modified" do
-			field = Wpscaffold::ACF::TextField.new( "name:text", formatting: "crazy" )
+			field = Wpscaffold::ACF::TextField.new( "name", [], formatting: "crazy" )
 			expect(field.to_xml['formatting']).to eq "crazy"
 			field.options[:formatting] = 'silly'
 			expect(field.to_xml['formatting']).to eq "silly"

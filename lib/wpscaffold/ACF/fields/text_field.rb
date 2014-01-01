@@ -3,6 +3,12 @@ require 'wpscaffold'
 module Wpscaffold
 	module ACF
 		class TextField < Field
+			class << self
+				def prehooks
+					"prehooks!"
+				end
+			end
+
 			def to_php
 				%q[<?php <%= variable %> = <%= get_field %>; if (<%= variable %>): ?>
 	<?php echo <%= variable %>; ?>

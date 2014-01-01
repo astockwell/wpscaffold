@@ -19,8 +19,12 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_dependency "activesupport", "~> 4.0.1"
+  spec.add_dependency "gyoku", "~> 1.1.0"
   spec.add_dependency "highline", "~> 1.6.20"
+  spec.add_dependency "nori", "~> 2.3.0"
+  spec.add_dependency "php-serialize", "~> 1.1.0"
   spec.add_dependency "thor"
+  spec.add_dependency "uuid", "~> 2.3.7"
 
   spec.add_development_dependency "bundler", "~> 1.3"
   spec.add_development_dependency "guard-rspec"

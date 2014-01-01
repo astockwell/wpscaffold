@@ -1,27 +1,31 @@
 require 'rubygems'
 require 'highline/import'
+require 'uuid'
 
 require 'wpscaffold'
 
 module Wpscaffold
 	module ACF
 		class Field
-			attr_accessor :options
+			attr_accessor :label, :name, :key, :options
 
-			def initialize(raw_field, options = {}, &block)
-				@options = options
-				parts = raw_field.split(":")
-
-				unless parts.length > 1
-					raise ArgumentError, "No fieldtype for (#{raw_field}) specified."
+			class << self
+				def prehooks
+					# actions to perform before field is
+					# instantiated, e.g. ask for child fields
 				end
+			end
 
-				@type = "#{parts[1].camelize}Field"
+			def initialize(raw_field_name, modifiers=[], options={})
+				@label   = raw_field_name.titleize
+				@name    = raw_field_name.parameterize.underscore
+				@key     = keygen
+				@options = default_options.merge options
 
-				unless field_exists?(@type)
-					raise ArgumentError, "No fieldtype (#{@type}) for (#{raw_field}) exists or is defined."
-				end
+				# Internal
+				@raw = raw_field_name
 
+				handle_modifiers(modifiers)
 			end
 
 			def to_php
@@ -34,11 +38,39 @@ module Wpscaffold
 
 			private
 
-			def field_exists?(field_type)
-				klass = ACF.const_get(field_type)
-				return klass.is_a?(Class)
-			rescue NameError
-				return false
+			# Generate unique field key
+			def default_options
+				{
+					"key"          => @key,
+					"label"        => @label,
+					"name"         => @name,
+					# "type"         => @type, # is this needed?
+					"instructions" => "",
+					"required"     => "0",
+					"order_no"     => 0,
+				}
+			end
+
+			def eacherator
+				"_each"
+			end
+
+			def keygen
+				uuid = UUID.new
+				"field_" + uuid.generate.gsub(/-/,'')[0..12]
+			end
+
+			def objecterator
+				"_object"
+			end
+
+			def php_variable
+				"$#{@name}"
+			end
+
+			def handle_modifiers(mods)
+				# implement way to adjust @options via modifiers
+				# maybe this is just another overridable method
 			end
 		end
 	end
