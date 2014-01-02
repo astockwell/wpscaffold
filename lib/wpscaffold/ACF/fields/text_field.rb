@@ -16,17 +16,6 @@ module Wpscaffold
 					"append"        => @options[:append]        || "",
 					"formatting"    => @options[:formatting]    || "html", # html || none
 					"maxlength"     => @options[:maxlength]     || "",
-					"conditional_logic" => @options[:conditional_logic] || {
-						"status" => "0",
-						"rules"  => [
-							{
-								"field"    => "null",
-								"operator" => "==",
-								"value"    => ""
-							}
-						],
-						"allorany" => "all"
-					},
 				})
 			end
 		end

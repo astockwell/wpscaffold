@@ -24,8 +24,9 @@ module Wpscaffold
 
 				# Internal
 				@raw = raw_field_name
+				@modifiers = modifiers
 
-				handle_modifiers(modifiers)
+				handle_modifiers
 			end
 
 			def to_php
@@ -48,6 +49,17 @@ module Wpscaffold
 					"instructions" => "",
 					"required"     => "0",
 					"order_no"     => 0,
+					"conditional_logic" => {
+						"status" => "0",
+						"rules"  => [
+							{
+								"field"    => "null",
+								"operator" => "==",
+								"value"    => ""
+							}
+						],
+						"allorany" => "all"
+					},
 				}
 			end
 
@@ -72,7 +84,7 @@ module Wpscaffold
 				"$#{@name}"
 			end
 
-			def handle_modifiers(mods)
+			def handle_modifiers
 				# implement way to adjust @options via modifiers
 				# maybe this is just another overridable method
 			end
