@@ -9,18 +9,18 @@ module Wpscaffold
 		class Field
 			attr_accessor :label, :name, :key, :options
 
-			class << self
-				def prehooks
-					# actions to perform before field is
-					# instantiated, e.g. ask for child fields
-				end
-			end
+			# class << self
+			# 	def prehooks
+			# 		# actions to perform before field is
+			# 		# instantiated, e.g. ask for child fields
+			# 	end
+			# end
 
 			def initialize(raw_field_name, modifiers=[], options={})
 				@label   = raw_field_name.titleize
 				@name    = raw_field_name.parameterize.underscore
 				@key     = keygen
-				@options = default_options.merge options
+				@options = options
 
 				# Internal
 				@raw = raw_field_name
@@ -39,12 +39,12 @@ module Wpscaffold
 			private
 
 			# Generate unique field key
-			def default_options
+			def default_xml
 				{
 					"key"          => @key,
 					"label"        => @label,
 					"name"         => @name,
-					# "type"         => @type, # is this needed?
+					"type"         => self.class.to_s.split('::').last.gsub(/Field/, '').downcase,
 					"instructions" => "",
 					"required"     => "0",
 					"order_no"     => 0,
@@ -53,6 +53,10 @@ module Wpscaffold
 
 			def eacherator
 				"_each"
+			end
+
+			def get_field
+				"get_field(\"#{@name}\")"
 			end
 
 			def keygen

@@ -3,14 +3,14 @@ require 'wpscaffold'
 module Wpscaffold
 	module ACF
 		class FieldGroup
-			FieldList = Struct.new(:fields, :parent_field, :parent_fieldlist)
 			attr_reader :title, :fieldlist
 
 			def initialize(field_group_subject, fields=[], options={})
 				@title = field_group_subject
-				@fieldlist = FieldList.new(fields: [])
+				@fieldlist = FieldList.new
 
 				fields.each do |field|
+					# todo: move this split/parse logic to UI, fields should be specified in proper array syntax, possibly w/ class already determined
 					parts = field.split(":")
 					raise ArgumentError, "No fieldtype for (#{field}) specified." unless parts.length > 1
 					@fieldlist.fields << field_factory(parts[0], parts[1], parts[2, parts.size], options.select { |k,v| k =~ /#{parts[0]}/ })
@@ -24,7 +24,6 @@ module Wpscaffold
 				unless field_class = field_type_exists?(field_class_name)
 					raise ArgumentError, "No fieldtype (#{field_class}) for (#{field_name}) exists or is defined."
 				end
-				options[:prehooks] = field_class.prehooks
 				field_class.new(field_name, modifiers, options)
 			end
 
