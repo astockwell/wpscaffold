@@ -2,9 +2,9 @@ require 'spec_helper'
 
 describe Wpscaffold::ACF::ImageField do
 	before :all do
-		@image_field = Wpscaffold::ACF::ImageField.new( "name", [], preview_size: "medium" )
+		@image_field = Wpscaffold::ACF::ImageField.new( "name", 0, [], preview_size: "medium" )
 		# Test class alias as well
-		@i_field = Wpscaffold::ACF::IField.new( "name", [], preview_size: "medium" )
+		@i_field = Wpscaffold::ACF::IField.new( "name", 0, [], preview_size: "medium" )
 	end
 
 	describe '#new' do
@@ -29,7 +29,7 @@ describe Wpscaffold::ACF::ImageField do
 			expect(@i_field.to_xml['preview_size']).to eq "medium"
 		end
 		it "allows options to be modified" do
-			field = Wpscaffold::ACF::ImageField.new( "name", [], preview_size: "medium" )
+			field = Wpscaffold::ACF::ImageField.new( "name", 0, [], preview_size: "medium" )
 			expect(field.to_xml['preview_size']).to eq "medium"
 			field.options[:preview_size] = 'large'
 			expect(field.to_xml['preview_size']).to eq "large"
@@ -47,7 +47,7 @@ describe Wpscaffold::ACF::ImageField do
 	context "with image size modifier" do
 		describe '#to_php' do
 			it "returns a template with the proper (modified) image size" do
-				field = Wpscaffold::ACF::ImageField.new( "name", ['this_size'] )
+				field = Wpscaffold::ACF::ImageField.new( "name", 0, ['this_size'] )
 				expect(field.to_php).to include '$name["sizes"]["this_size"]'
 			end
 		end

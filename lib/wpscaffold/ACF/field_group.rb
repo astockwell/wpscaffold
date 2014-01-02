@@ -9,22 +9,22 @@ module Wpscaffold
 				@title = field_group_subject
 				@fieldlist = FieldList.new
 
-				fields.each do |field|
+				fields.each_with_index do |field, index|
 					# todo: move this split/parse logic to UI, fields should be specified in proper array syntax, possibly w/ class already determined
 					parts = field.split(":")
 					raise ArgumentError, "No fieldtype for (#{field}) specified." unless parts.length > 1
-					@fieldlist.fields << field_factory(parts[0], parts[1], parts[2, parts.size], options.select { |k,v| k =~ /#{parts[0]}/ })
+					@fieldlist.fields << field_factory(parts[0], parts[1], index, parts[2, parts.size], options.select { |k,v| k =~ /#{parts[0]}/ })
 				end
 
 			end
 
-			def field_factory(field_name, field_type, modifiers=[], options={})
+			def field_factory(field_name, field_type, order_no, modifiers=[], options={})
 				field_class_name = "#{field_type.to_s.capitalize}Field"
 
 				unless field_class = field_type_exists?(field_class_name)
 					raise ArgumentError, "No fieldtype (#{field_class}) for (#{field_name}) exists or is defined."
 				end
-				field_class.new(field_name, modifiers, options)
+				field_class.new(field_name, order_no, modifiers, options)
 			end
 
 			# private

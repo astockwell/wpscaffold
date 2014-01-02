@@ -3,22 +3,16 @@ require 'wpscaffold'
 module Wpscaffold
 	module ACF
 		class RepeaterField < Field
-
-			def get_field_info
-				ask("\nWhat are the child fields for #{@raw}? ", Array)
-			end
-
 			def to_php
-				%q[<?php <%= variable %> = <%= get_field %>; if (<%= variable %>): ?>
-	<?php foreach(<%= variable %> as <%= variable + EACHERATOR %>): ?>
+%Q[<?php #{php_variable} = #{get_field}; if (#{php_variable}): ?>
+	<?php foreach(#{php_variable} as #{php_variable}#{eacherator}): ?>
 
-<%= children %>
+#{@child_fields}
 	<?php endforeach; ?>
 <?php endif; ?>]
 			end
-
 			def to_xml
-				{
+				default_xml.merge({
 					# "sub_fields" => [
 					# 	{
 					# 		"key" => "field_527c0c8578be9",
@@ -48,12 +42,15 @@ module Wpscaffold
 					# 		"order_no" => 1
 					# 	}
 					# ],
-					"row_min"           => "0",
-					"row_limit"         => "",
-					"layout"            => "table",
-					"button_label"      => "Add Row",
-				}
+					"row_min"      => @options[:row_min]      || "0",
+					"row_limit"    => @options[:row_limit]    || "",
+					"layout"       => @options[:layout]       || "table",
+					"button_label" => @options[:button_label] || "Add Row",
+				})
 			end
 		end
+
+		# Alias the class
+		RField = RepeaterField
 	end
 end

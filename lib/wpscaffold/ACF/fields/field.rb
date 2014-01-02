@@ -7,7 +7,7 @@ require 'wpscaffold'
 module Wpscaffold
 	module ACF
 		class Field
-			attr_accessor :label, :name, :key, :options
+			attr_accessor :label, :name, :order_no, :key, :options
 
 			# class << self
 			# 	def prehooks
@@ -16,11 +16,12 @@ module Wpscaffold
 			# 	end
 			# end
 
-			def initialize(raw_field_name, modifiers=[], options={})
-				@label   = raw_field_name.titleize
-				@name    = raw_field_name.parameterize.underscore
-				@key     = keygen
-				@options = options
+			def initialize(raw_field_name, order_no, modifiers=[], options={})
+				@label    = raw_field_name.titleize
+				@name     = raw_field_name.parameterize.underscore
+				@order_no = order_no
+				@key      = keygen
+				@options  = options
 
 				# Internal
 				@raw = raw_field_name
@@ -46,10 +47,10 @@ module Wpscaffold
 					"label"        => @label,
 					"name"         => @name,
 					"type"         => self.class.to_s.split('::').last.gsub(/Field/, '').downcase,
-					"instructions" => "",
-					"required"     => "0",
-					"order_no"     => 0,
-					"conditional_logic" => {
+					"order_no"     => @order_no,
+					"instructions" => @options[:instructions] || "",
+					"required"     => @options[:required]     || "0",
+					"conditional_logic" => @options[:conditional_logic] || {
 						"status" => "0",
 						"rules"  => [
 							{

@@ -16,7 +16,7 @@ describe Wpscaffold::ACF::FieldGroup do
 
 	describe '#field_factory' do
 		it "creates the correct instance of a field subclass" do
-			instance = @field_group_empty.field_factory('title', 'text')
+			instance = @field_group_empty.field_factory('title', 'text', 0)
 			expect(instance).to be_an_instance_of Wpscaffold::ACF::TextField
 		end
 		it "returns an error for a non-existant subclass" do

@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Wpscaffold::ACF::Field do
 	before :all do
-		@field = Wpscaffold::ACF::Field.new( "raw field name" )
+		@field = Wpscaffold::ACF::Field.new( "raw field name", 0 )
 	end
 
 	describe '#new' do
