@@ -23,7 +23,7 @@ module Wpscaffold
 
 				# Bootstrap, save a lot of error checking
 				@options[:xml] = {} unless @options[:xml]
-				handle_modifiers
+				# handle_modifiers
 			end
 
 			def to_php
@@ -85,10 +85,10 @@ module Wpscaffold
 				"$#{@name}"
 			end
 
-			def handle_modifiers
-				# implement way to adjust @options via modifiers
-				# maybe this is just another overridable method
-			end
+			# def handle_modifiers
+			# 	# implement way to adjust @options via modifiers
+			# 	# maybe this is just another overridable method
+			# end
 		end
 	end
 end
