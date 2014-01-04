@@ -4,11 +4,11 @@ require 'wpscaffold/ACF/field_group'
 require 'wpscaffold/ACF/field_list'
 require 'wpscaffold/ACF/fields/field'
 require 'wpscaffold/ACF/fields/text_field'
-# modifier signature:
+# modifiers -
 require 'wpscaffold/ACF/fields/image_field'
-# modifier signature: [image_size]
+# modifiers - :image_size
 require 'wpscaffold/ACF/fields/repeater_field'
-# modifier signature:
+# modifiers -
 
 module Wpscaffold
 	module ACF
@@ -18,11 +18,10 @@ module Wpscaffold
 		class << self
 
 			# Create instances of correct fieldtypes
-			def create_field(field_name, field_type, order_no, parent_field=nil, modifiers=[], options={})
+			def create_field(field_name, field_type, order_no, parent_field=nil, options={})
 				field_class_name = "#{field_type.to_s.capitalize}Field"
 				raise ArgumentError, "No fieldtype (#{field_class_name}) for (#{field_name}) exists or is defined." unless field_class = field_type_exists?(field_class_name)
-				# todo: modifiers array should be removed, it is UI specific, and modifiers should be passed as options and handled thusly by individual fieldtypes
-				field_class.new(field_name, order_no, parent_field, modifiers, options)
+				field_class.new(field_name, order_no, parent_field, options)
 			end
 
 			# private

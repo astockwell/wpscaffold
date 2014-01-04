@@ -9,7 +9,7 @@ module Wpscaffold
 		class Field
 			attr_accessor :label, :name, :order_no, :parent, :options, :key
 
-			def initialize(raw_field_name, order_no, parent=nil, modifiers=[], options={})
+			def initialize(raw_field_name, order_no, parent=nil, options={})
 				@label     = raw_field_name.titleize
 				@name      = raw_field_name.parameterize.underscore
 				@order_no  = order_no
@@ -18,12 +18,10 @@ module Wpscaffold
 
 				# Internal
 				@raw       = raw_field_name
-				@modifiers = modifiers
 				@options   = options
 
 				# Bootstrap, save a lot of error checking
 				@options[:xml] = {} unless @options[:xml]
-				# handle_modifiers
 			end
 
 			def to_php
@@ -72,11 +70,6 @@ module Wpscaffold
 				"field_" + uuid.generate.gsub(/-/,'')[0..12]
 			end
 
-			# def merge_xml_options
-			# 	@xml = @xml || default_xml
-			# 	@xml.merge! @options[:xml]
-			# end
-
 			def objecterator
 				"_object"
 			end
@@ -84,11 +77,6 @@ module Wpscaffold
 			def php_variable
 				"$#{@name}"
 			end
-
-			# def handle_modifiers
-			# 	# implement way to adjust @options via modifiers
-			# 	# maybe this is just another overridable method
-			# end
 		end
 	end
 end
