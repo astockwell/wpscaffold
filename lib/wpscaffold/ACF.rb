@@ -24,7 +24,7 @@ module Wpscaffold
 				field_class.new(field_name, order_no, parent_field, options)
 			end
 
-			# private
+			private
 
 			# Safely get fieldtype's class from user input
 			def field_type_exists?(field_type)
