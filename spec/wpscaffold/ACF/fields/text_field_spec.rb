@@ -2,9 +2,11 @@ require 'spec_helper'
 
 describe Wpscaffold::ACF::TextField do
 	before :all do
-		@text_field = Wpscaffold::ACF::TextField.new( "name", 0, [], formatting: "crazy" )
-		# Test class alias as well
-		@t_field = Wpscaffold::ACF::TField.new( "name", 0, [], formatting: "crazy" )
+		@text_field = Wpscaffold::ACF::TextField.new( "name", 0, nil, [], xml: { formatting: "crazy" } )
+		# Test class alias
+		@t_field = Wpscaffold::ACF::TField.new( "name", 0, nil, [], xml: { formatting: "crazy" } )
+		# Test factory
+		@text_from_factory = Wpscaffold::ACF.create_field( "name", :text, 0, nil, [], xml: { formatting: "crazy" } )
 	end
 
 	describe '#new' do
@@ -28,10 +30,16 @@ describe Wpscaffold::ACF::TextField do
 			expect(@text_field.to_xml['formatting']).to eq "crazy"
 			expect(@t_field.to_xml['formatting']).to eq "crazy"
 		end
-		it "allows options to be modified" do
-			field = Wpscaffold::ACF::TextField.new( "name", 0, [], formatting: "crazy" )
+		it "allows field-agnostic options to be modified" do
+			field = Wpscaffold::ACF::TextField.new( "name", 0, nil, [], xml: { formatting: "crazy" } )
+			expect(field.to_xml['required']).to eq "0"
+			field.options[:xml][:required] = '1'
+			expect(field.to_xml['required']).to eq "1"
+		end
+		it "allows field-specific options to be modified" do
+			field = Wpscaffold::ACF::TextField.new( "name", 0, nil, [], xml: { formatting: "crazy" } )
 			expect(field.to_xml['formatting']).to eq "crazy"
-			field.options[:formatting] = 'silly'
+			field.options[:xml][:formatting] = 'silly'
 			expect(field.to_xml['formatting']).to eq "silly"
 		end
 	end

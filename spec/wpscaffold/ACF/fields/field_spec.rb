@@ -12,6 +12,7 @@ describe Wpscaffold::ACF::Field do
 		it "properly populates the default attributes" do
 			expect(@field.label).to eq 'Raw Field Name'
 			expect(@field.name).to eq 'raw_field_name'
+			expect(@field.order_no).to eq 0
 			expect(@field.key).to be_an_instance_of String
 		end
 	end

@@ -16,9 +16,9 @@ module Wpscaffold
 			end
 			def to_xml
 				default_xml.merge({
-					"save_format"  => @options[:save_format]  || "object",
-					"preview_size" => @options[:preview_size] || "thumbnail",
-					"library"      => @options[:library]      || "all",
+					"save_format"  => @options[:xml][:save_format]  || "object",
+					"preview_size" => @options[:xml][:preview_size] || "thumbnail",
+					"library"      => @options[:xml][:library]      || "all",
 				})
 			end
 		end

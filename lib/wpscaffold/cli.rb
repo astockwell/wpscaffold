@@ -7,5 +7,12 @@ module Wpscaffold
 		def portray(name)
 			puts Wpscaffold::Food.portray(name)
 		end
+
+		desc "field parsing logic"
+		def parse_field(raw)
+			parts = raw.split(":")
+			raise ArgumentError, "No fieldtype for (#{raw}) specified." unless parts.length > 1
+			@fieldlist.fields << field_factory(parts[0], parts[1], index, parts[2, parts.size], options.select { |k,v| k =~ /#{parts[0]}/ })
+		end
 	end
 end

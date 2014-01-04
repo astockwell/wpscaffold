@@ -7,26 +7,22 @@ require 'wpscaffold'
 module Wpscaffold
 	module ACF
 		class Field
-			attr_accessor :label, :name, :order_no, :key, :options
+			attr_accessor :label, :name, :order_no, :parent, :options, :key
 
-			# class << self
-			# 	def prehooks
-			# 		# actions to perform before field is
-			# 		# instantiated, e.g. ask for child fields
-			# 	end
-			# end
-
-			def initialize(raw_field_name, order_no, modifiers=[], options={})
-				@label    = raw_field_name.titleize
-				@name     = raw_field_name.parameterize.underscore
-				@order_no = order_no
-				@key      = keygen
-				@options  = options
+			def initialize(raw_field_name, order_no, parent=nil, modifiers=[], options={})
+				@label     = raw_field_name.titleize
+				@name      = raw_field_name.parameterize.underscore
+				@order_no  = order_no
+				@parent    = parent
+				@key       = keygen
 
 				# Internal
-				@raw = raw_field_name
+				@raw       = raw_field_name
 				@modifiers = modifiers
+				@options   = options
 
+				# Bootstrap, save a lot of error checking
+				@options[:xml] = {} unless @options[:xml]
 				handle_modifiers
 			end
 
@@ -40,7 +36,6 @@ module Wpscaffold
 
 			private
 
-			# Generate unique field key
 			def default_xml
 				{
 					"key"          => @key,
@@ -48,9 +43,9 @@ module Wpscaffold
 					"name"         => @name,
 					"type"         => self.class.to_s.split('::').last.gsub(/Field/, '').downcase,
 					"order_no"     => @order_no,
-					"instructions" => @options[:instructions] || "",
-					"required"     => @options[:required]     || "0",
-					"conditional_logic" => @options[:conditional_logic] || {
+					"instructions" => @options[:xml][:instructions] || "",
+					"required"     => @options[:xml][:required]     || "0",
+					"conditional_logic" => @options[:xml][:conditional_logic] || {
 						"status" => "0",
 						"rules"  => [
 							{
@@ -76,6 +71,11 @@ module Wpscaffold
 				uuid = UUID.new
 				"field_" + uuid.generate.gsub(/-/,'')[0..12]
 			end
+
+			# def merge_xml_options
+			# 	@xml = @xml || default_xml
+			# 	@xml.merge! @options[:xml]
+			# end
 
 			def objecterator
 				"_object"
