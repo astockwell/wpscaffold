@@ -7,13 +7,12 @@ require 'wpscaffold'
 module Wpscaffold
 	module ACF
 		class Field
-			attr_accessor :label, :name, :order_no, :parent, :options, :key
+			attr_accessor :label, :name, :order_no, :options, :key
 
-			def initialize(raw_field_name, order_no, parent=nil, options={})
+			def initialize(raw_field_name, order_no, options={})
 				@label     = raw_field_name.titleize
 				@name      = raw_field_name.parameterize.underscore
 				@order_no  = order_no
-				@parent    = parent
 				@key       = keygen
 
 				# Internal
@@ -58,11 +57,15 @@ module Wpscaffold
 			end
 
 			def eacherator
-				"_each"
+				"__fields__"
 			end
 
-			def get_field
-				"get_field(\"#{@name}\")"
+			def get_field(format=nil)
+				if format == :erb
+					return '<%= get_field %>'
+				else
+					"get_field(\"#{@name}\")"
+				end
 			end
 
 			def keygen
@@ -71,11 +74,15 @@ module Wpscaffold
 			end
 
 			def objecterator
-				"_object"
+				"__object__"
 			end
 
-			def php_variable
-				"$#{@name}"
+			def php_variable(format=nil)
+				if format == :erb
+					return '<%= php_variable %>'
+				else
+					"$#{@name}"
+				end
 			end
 		end
 	end

@@ -1,13 +1,16 @@
+require 'rubygems'
+require 'tilt'
+
 require 'wpscaffold'
 
 module Wpscaffold
 	module ACF
 		class RepeaterField < Field
-			def to_php
-%Q[<?php #{php_variable} = #{get_field}; if (#{php_variable}): ?>
-	<?php foreach(#{php_variable} as #{php_variable}#{eacherator}): ?>
+			def to_php(format=nil)
+%Q[<?php #{php_variable(format)} = #{get_field(format)}; if (#{php_variable(format)}): ?>
+	<?php foreach(#{php_variable(format)} as #{php_variable(format)}#{eacherator}): ?>
 
-#{@child_fields}
+#{child_fields_to_php}
 	<?php endforeach; ?>
 <?php endif; ?>]
 			end
@@ -42,11 +45,26 @@ module Wpscaffold
 					# 		"order_no" => 1
 					# 	}
 					# ],
-					"row_min"      => @options[:row_min]      || "0",
-					"row_limit"    => @options[:row_limit]    || "",
-					"layout"       => @options[:layout]       || "table",
-					"button_label" => @options[:button_label] || "Add Row",
+					"row_min"      => @options[:xml][:row_min]      || "0",
+					"row_limit"    => @options[:xml][:row_limit]    || "",
+					"layout"       => @options[:xml][:layout]       || "table",
+					"button_label" => @options[:xml][:button_label] || "Add Row",
 				})
+			end
+
+			private
+
+			def child_fields_to_php
+				php_output = ''
+				children = *@options[:child_fields]
+				children.each do |f|
+					repeater_get_field = "$#{@name}#{eacherator}[\"#{f.name}\"]"
+					template = Tilt['erb'].new { f.to_php(:erb) }
+					rendered = template.render(f, get_field: repeater_get_field)
+					indented = rendered.gsub(/^/) { |match| "\t\t" }
+					php_output += indented + "\n"
+				end
+				php_output
 			end
 		end
 

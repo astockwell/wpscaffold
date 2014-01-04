@@ -3,9 +3,9 @@ require 'wpscaffold'
 module Wpscaffold
 	module ACF
 		class ImageField < Field
-			def to_php
-%Q[<?php #{php_variable} = #{get_field}; if (#{php_variable}): ?>
-	<img src="<?php echo #{php_variable}#{image_size}; ?>" alt="<?php echo #{php_variable}["alt"]; ?>" title="<?php echo #{php_variable}["title"]; ?>" />
+			def to_php(format=nil)
+%Q[<?php #{php_variable(format)} = #{get_field(format)}; if (#{php_variable(format)}): ?>
+	<img src="<?php echo #{php_variable(format)}#{image_size}; ?>" alt="<?php echo #{php_variable(format)}["alt"]; ?>" title="<?php echo #{php_variable(format)}["title"]; ?>" />
 <?php endif; ?>]
 			end
 			def to_xml

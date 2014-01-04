@@ -3,9 +3,9 @@ require 'wpscaffold'
 module Wpscaffold
 	module ACF
 		class TextField < Field
-			def to_php
-%Q[<?php #{php_variable} = #{get_field}; if (#{php_variable}): ?>
-	<?php echo #{php_variable}; ?>
+			def to_php(format=nil)
+%Q[<?php #{php_variable(format)} = #{get_field(format)}; if (#{php_variable(format)}): ?>
+	<?php echo #{php_variable(format)}; ?>
 <?php endif; ?>]
 			end
 			def to_xml
