@@ -24,7 +24,8 @@ describe Wpscaffold::ACF::RepeaterField do
 	# end
 	describe '#to_php' do
 		it "returns a template as a string" do
-			puts @repeater_field.to_php
+			puts @r_field.to_xml
+			# puts @repeater_field.to_php
 			expect(@repeater_field.to_php).to be_an_instance_of String
 			expect(@r_field.to_php).to be_an_instance_of String
 			expect(@repeater_from_factory.to_php).to be_an_instance_of String

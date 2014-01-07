@@ -16,35 +16,7 @@ module Wpscaffold
 			end
 			def to_xml
 				default_xml.merge({
-					# "sub_fields" => [
-					# 	{
-					# 		"key" => "field_527c0c8578be9",
-					# 		"label" => "Position Title",
-					# 		"name" => "position_title",
-					# 		"type" => "text",
-					# 		"instructions" => "",
-					# 		"column_width" => "",
-					# 		"default_value" => "",
-					# 		"placeholder" => "",
-					# 		"prepend" => "",
-					# 		"append" => "",
-					# 		"formatting" => "html",
-					# 		"maxlength" => "",
-					# 		"order_no" => 0
-					# 	},
-					# 	{
-					# 		"key" => "field_527c0c9378bea",
-					# 		"label" => "Position Details",
-					# 		"name" => "position_details",
-					# 		"type" => "wysiwyg",
-					# 		"instructions" => "",
-					# 		"column_width" => "",
-					# 		"default_value" => "",
-					# 		"toolbar" => "basic",
-					# 		"media_upload" => "no",
-					# 		"order_no" => 1
-					# 	}
-					# ],
+					"sub_fields"   => child_fields_to_xml           || nil,
 					"row_min"      => @options[:xml][:row_min]      || "0",
 					"row_limit"    => @options[:xml][:row_limit]    || "",
 					"layout"       => @options[:xml][:layout]       || "table",
@@ -53,6 +25,16 @@ module Wpscaffold
 			end
 
 			private
+
+			def child_fields_to_xml
+				xml_output = []
+				children = *@options[:child_fields]
+				children.each do |f|
+					xml_output << f.to_xml
+					xml_output.last.delete("conditional_logic")
+				end
+				xml_output
+			end
 
 			def child_fields_to_php
 				php_output = ''
