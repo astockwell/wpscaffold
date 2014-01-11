@@ -1,5 +1,5 @@
 require 'spec_helper'
-require 'pp'
+# require 'pp'
 
 describe Wpscaffold::ACF::RepeaterField do
 	before :all do
@@ -69,7 +69,7 @@ describe Wpscaffold::ACF::RepeaterField do
 	describe '#to_xml' do
 		it "returns a hash" do
 			# puts @repeater_field_without_sub.to_xml
-			pp @repeater_field_with_sub.to_xml
+			# pp @repeater_field_with_sub.to_xml
 			@fields.each do |f|
 				expect(f.to_xml).to be_an_instance_of Hash
 			end
