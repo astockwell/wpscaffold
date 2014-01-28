@@ -85,7 +85,7 @@ describe Wpscaffold::ACF::RepeaterField do
 			it "contains correct subfields" do
 				@fields_with_sub.each do |f|
 					expect(f.to_xml["sub_fields"].size).to eq 1
-					expect(f.to_xml["sub_fields"][0]["name"]).to eq("my_sub_repeater")
+					expect(f.to_xml["sub_fields"][0][:"name"]).to eq("my_sub_repeater")
 					expect(f.to_xml["sub_fields"][0]["sub_fields"].size).to eq 4
 				end
 			end

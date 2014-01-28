@@ -35,23 +35,23 @@ module Wpscaffold
 
 			def default_xml
 				{
-					"key"          => @key,
-					"label"        => @label,
-					"name"         => @name,
-					"type"         => self.class.to_s.split('::').last.gsub(/Field/, '').downcase,
-					"order_no"     => @order_no,
-					"instructions" => @options[:xml][:instructions] || "",
-					"required"     => @options[:xml][:required]     || "0",
-					"conditional_logic" => @options[:xml][:conditional_logic] || {
-						"status" => "0",
-						"rules"  => [
+					:"key"          => @key,
+					:"label"        => @label,
+					:"name"         => @name,
+					:"type"         => self.class.to_s.split('::').last.gsub(/Field/, '').downcase,
+					:"order_no"     => @order_no,
+					:"instructions" => @options[:xml][:instructions] || "",
+					:"required"     => @options[:xml][:required]     || "0",
+					:"conditional_logic" => @options[:xml][:conditional_logic] || {
+						:"status" => "0",
+						:"rules"  => [
 							{
-								"field"    => "null",
-								"operator" => "==",
-								"value"    => ""
+								:"field"    => "null",
+								:"operator" => "==",
+								:"value"    => ""
 							}
 						],
-						"allorany" => "all"
+						:"allorany" => "all"
 					},
 				}
 			end

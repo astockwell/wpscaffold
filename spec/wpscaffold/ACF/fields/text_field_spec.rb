@@ -32,9 +32,9 @@ describe Wpscaffold::ACF::TextField do
 		end
 		it "allows field-agnostic options to be modified" do
 			field = Wpscaffold::ACF::TextField.new( "name", 0, xml: { formatting: "crazy" } )
-			expect(field.to_xml['required']).to eq "0"
+			expect(field.to_xml[:'required']).to eq "0"
 			field.options[:xml][:required] = '1'
-			expect(field.to_xml['required']).to eq "1"
+			expect(field.to_xml[:'required']).to eq "1"
 		end
 		it "allows field-specific options to be modified" do
 			field = Wpscaffold::ACF::TextField.new( "name", 0, xml: { formatting: "crazy" } )
