@@ -30,9 +30,9 @@ describe Wpscaffold::ACF::ImageField do
 			expect(@image_from_factory.to_xml).to be_an_instance_of Hash
 		end
 		it "responds to options params correctly" do
-			expect(@image_field.to_xml['preview_size']).to eq "medium"
-			expect(@i_field.to_xml['preview_size']).to eq "medium"
-			expect(@image_from_factory.to_xml['preview_size']).to eq "medium"
+			expect(@image_field.to_xml[:preview_size]).to eq "medium"
+			expect(@i_field.to_xml[:preview_size]).to eq "medium"
+			expect(@image_from_factory.to_xml[:preview_size]).to eq "medium"
 		end
 		it "allows field-agnostic options to be modified" do
 			field = Wpscaffold::ACF::ImageField.new( "my image", 0, xml: { preview_size: "medium" } )
@@ -42,9 +42,9 @@ describe Wpscaffold::ACF::ImageField do
 		end
 		it "allows field-specific options to be modified" do
 			field = Wpscaffold::ACF::ImageField.new( "my image", 0, xml: { preview_size: "medium" } )
-			expect(field.to_xml['preview_size']).to eq "medium"
+			expect(field.to_xml[:preview_size]).to eq "medium"
 			field.options[:xml][:preview_size] = 'large'
-			expect(field.to_xml['preview_size']).to eq "large"
+			expect(field.to_xml[:preview_size]).to eq "large"
 		end
 	end
 

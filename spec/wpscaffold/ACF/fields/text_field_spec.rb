@@ -27,8 +27,8 @@ describe Wpscaffold::ACF::TextField do
 			expect(@t_field.to_xml).to be_an_instance_of Hash
 		end
 		it "responds to options params correctly" do
-			expect(@text_field.to_xml['formatting']).to eq "crazy"
-			expect(@t_field.to_xml['formatting']).to eq "crazy"
+			expect(@text_field.to_xml[:formatting]).to eq "crazy"
+			expect(@t_field.to_xml[:formatting]).to eq "crazy"
 		end
 		it "allows field-agnostic options to be modified" do
 			field = Wpscaffold::ACF::TextField.new( "name", 0, xml: { formatting: "crazy" } )
@@ -38,9 +38,9 @@ describe Wpscaffold::ACF::TextField do
 		end
 		it "allows field-specific options to be modified" do
 			field = Wpscaffold::ACF::TextField.new( "name", 0, xml: { formatting: "crazy" } )
-			expect(field.to_xml['formatting']).to eq "crazy"
+			expect(field.to_xml[:formatting]).to eq "crazy"
 			field.options[:xml][:formatting] = 'silly'
-			expect(field.to_xml['formatting']).to eq "silly"
+			expect(field.to_xml[:formatting]).to eq "silly"
 		end
 	end
 end

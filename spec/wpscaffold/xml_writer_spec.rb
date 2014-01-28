@@ -21,6 +21,7 @@ describe Wpscaffold::XmlWriter do
 
 	describe '#render' do
 		it "renders all items to xml" do
+			pp @xml_empty.render
 			# pp @xml_three.render
 			expect(@xml_empty.render).to be_a String
 			expect(@xml_three.render).to be_a String

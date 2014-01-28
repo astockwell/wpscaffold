@@ -10,12 +10,12 @@ module Wpscaffold
 			end
 			def to_xml
 				default_xml.merge({
-					"default_value" => @options[:xml][:default_value] || "",
-					"placeholder"   => @options[:xml][:placeholder]   || "",
-					"prepend"       => @options[:xml][:prepend]       || "",
-					"append"        => @options[:xml][:append]        || "",
-					"formatting"    => @options[:xml][:formatting]    || "html", # html || none
-					"maxlength"     => @options[:xml][:maxlength]     || "",
+					:default_value => @options[:xml][:default_value] || "",
+					:placeholder   => @options[:xml][:placeholder]   || "",
+					:prepend       => @options[:xml][:prepend]       || "",
+					:append        => @options[:xml][:append]        || "",
+					:formatting    => @options[:xml][:formatting]    || "html", # html || none
+					:maxlength     => @options[:xml][:maxlength]     || "",
 				})
 			end
 		end

@@ -16,11 +16,11 @@ module Wpscaffold
 			end
 			def to_xml
 				default_xml.merge({
-					"sub_fields"   => child_fields_to_xml           || nil,
-					"row_min"      => @options[:xml][:row_min]      || "0",
-					"row_limit"    => @options[:xml][:row_limit]    || "",
-					"layout"       => @options[:xml][:layout]       || "table",
-					"button_label" => @options[:xml][:button_label] || "Add Row",
+					:sub_fields   => child_fields_to_xml           || nil,
+					:row_min      => @options[:xml][:row_min]      || "0",
+					:row_limit    => @options[:xml][:row_limit]    || "",
+					:layout       => @options[:xml][:layout]       || "table",
+					:button_label => @options[:xml][:button_label] || "Add Row",
 				})
 			end
 
@@ -31,7 +31,7 @@ module Wpscaffold
 				children = *@options[:child_fields]
 				children.each do |f|
 					xml_output << f.to_xml
-					xml_output.last.delete("conditional_logic")
+					xml_output.last.delete(:conditional_logic)
 				end
 				xml_output
 			end

@@ -15,18 +15,18 @@ module Wpscaffold
 			creation_time = Time.new
 			xml_header = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n<!-- generator=\"WordPress/3.7.1\" created=\"#{creation_time.gmtime.strftime("%Y-%m-%d %H:%M:%S")}\" -->\n"
 			xml_skel = {
-				"rss" => {
-					"channel" => {
-						"pubDate"        => creation_time.gmtime.strftime("%a, %d %b %Y %H:%M:%S %z"),
-						"wp:wxr_version" => "1.1",
-						"item"           => prepare_items
+				:"rss" => {
+					:"channel" => {
+						:"pubDate"        => creation_time.gmtime.strftime("%a, %d %b %Y %H:%M:%S %z"),
+						:"wp:wxr_version" => "1.1",
+						:"item"           => prepare_items
 					},
-					"@version"       => "2.0",
-					"@xmlns:excerpt" => "http://wordpress.org/export/1.1/excerpt/",
-					"@xmlns:content" => "http://purl.org/rss/1.0/modules/content/",
-					"@xmlns:wfw"     => "http://wellformedweb.org/CommentAPI/",
-					"@xmlns:dc"      => "http://purl.org/dc/elements/1.1/",
-					"@xmlns:wp"      => "http://wordpress.org/export/1.1/"
+					:"@version"       => "2.0",
+					:"@xmlns:excerpt" => "http://wordpress.org/export/1.1/excerpt/",
+					:"@xmlns:content" => "http://purl.org/rss/1.0/modules/content/",
+					:"@xmlns:wfw"     => "http://wellformedweb.org/CommentAPI/",
+					:"@xmlns:dc"      => "http://purl.org/dc/elements/1.1/",
+					:"@xmlns:wp"      => "http://wordpress.org/export/1.1/"
 				}
 			}
 
