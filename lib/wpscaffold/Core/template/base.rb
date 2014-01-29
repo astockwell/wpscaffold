@@ -9,10 +9,14 @@ module Wpscaffold
 				def initialize(page_name, options={})
 					@title   = page_name.titleize
 					@slug    = page_name.parameterize.underscore
-					@options = options
 
 					# Internal
+					@options = options
 					@raw     = page_name
+				end
+
+				def filename
+					raise NotImplementedError
 				end
 
 				def to_php

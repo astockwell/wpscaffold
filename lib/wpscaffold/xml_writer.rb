@@ -44,23 +44,23 @@ module Wpscaffold
 
 		def item_skel(item)
 			post_date = Time.new
-			item_obj = {
+			{
 				:'title!'            => "<![CDATA[#{item[:title]}]]>",
 				:'pubDate'           => post_date.gmtime.strftime("%a, %d %b %Y %H:%M:%S %z"),
 				:'wp:post_date'      => post_date.localtime.strftime("%Y-%m-%d %H:%M:%S"),
 				:'wp:post_date_gmt'  => post_date.gmtime.strftime("%Y-%m-%d %H:%M:%S"),
+				:'content!'          => item[:content] && "<![CDATA[#{item[:content]}]]>" || nil,
+				:'excerpt!'          => item[:excerpt] && "<![CDATA[#{item[:excerpt]}]]>" || nil,
 				:'wp:comment_status' => item[:comment_status] ? item[:comment_status] : 'closed',
 				:'wp:ping_status'    => item[:ping_status] ? item[:ping_status] : 'closed',
 				:'wp:status'         => item[:status] ? item[:status] : 'publish',
 				:'wp:post_type'      => item[:post_type],
+				:'wp:post_name'      => item[:post_name] || nil,
+				:'wp:post_id'        => item[:post_id] || nil,
+				:'content:encoded!'  => item[:content] || nil,
+				:'excerpt:encoded!'  => item[:excerpt] || nil,
+				:'wp:postmeta'       => item[:postmeta] || nil
 			}
-			item_obj[:'wp:post_name']     = item[:post_name] if item[:post_name]
-			item_obj[:'wp:post_id']       = item[:post_id]   if item[:post_id]
-			item_obj[:'content:encoded!'] = item[:content]   if item[:content]
-			item_obj[:'excerpt:encoded!'] = item[:excerpt]   if item[:excerpt]
-			item_obj[:'wp:postmeta']      = item[:postmeta]  if item[:postmeta]
-
-			item_obj
 		end
 	end
 end
