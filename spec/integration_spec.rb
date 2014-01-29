@@ -2,16 +2,24 @@ require 'spec_helper'
 
 describe "Wpscaffold Integration Test" do
 	describe "create a static page" do
-		it "renders xml" do
+		before :all do
+			@time = Time.new(2013, 12, 31, 9, 2, 2, "-07:00")
 			@fields = [
-				Wpscaffold::ACF::TextField.new( "field 1", 0 ),
-				Wpscaffold::ACF::TextField.new( "field 2", 1 ),
-				Wpscaffold::ACF::TextField.new( "field 3", 2 ),
+				Wpscaffold::ACF::TextField.new( "field 1", 0, key: "10000000x" ),
+				Wpscaffold::ACF::TextField.new( "field 2", 1, key: "20000000x" ),
+				Wpscaffold::ACF::TextField.new( "field 3", 2, key: "30000000x" ),
 			]
 			@field_group = Wpscaffold::ACF::FieldGroup.new( "Group Name", @fields )
 			@static = Wpscaffold::Core.create_template "Static", "Page Name", fields: @field_group
-			@xml_three = Wpscaffold::XmlWriter.new([@static, @field_group])
-			puts @xml_three.render
+			@xml_three = Wpscaffold::XmlWriter.new([@static, @field_group], post_date: @time)
+		end
+		it "renders xml correctly" do
+			# puts @xml_three.render
+			expect(@xml_three.render).to eq %Q[<?xml version="1.0" encoding="UTF-8" ?>\n<!-- generator="WordPress/3.7.1" created="2013-12-31 16:02:02" -->\n<rss version="2.0" xmlns:excerpt="http://wordpress.org/export/1.1/excerpt/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:wfw="http://wellformedweb.org/CommentAPI/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:wp="http://wordpress.org/export/1.1/"><channel><pubDate>Tue, 31 Dec 2013 16:02:02 +0000</pubDate><wp:wxrVersion>1.1</wp:wxrVersion><item><title><![CDATA[Page Name]]></title><pubDate>Tue, 31 Dec 2013 16:02:02 +0000</pubDate><wp:postDate>2013-12-31 09:02:02</wp:postDate><wp:postDateGmt>2013-12-31 16:02:02</wp:postDateGmt><excerpt xsi:nil="true"/><wp:commentStatus>closed</wp:commentStatus><wp:pingStatus>closed</wp:pingStatus><wp:status>publish</wp:status><wp:postType>page</wp:postType><wp:postName>page_name</wp:postName><wp:postId xsi:nil="true"/><content:encoded xsi:nil="true"/><excerpt:encoded xsi:nil="true"/><wp:postmeta><wp:metaKey>_wp_page_template</wp:metaKey><wp:metaValue><![CDATA[default]]></wp:metaValue></wp:postmeta></item><item><title><![CDATA[Group Name]]></title><pubDate>Tue, 31 Dec 2013 16:02:02 +0000</pubDate><wp:postDate>2013-12-31 09:02:02</wp:postDate><wp:postDateGmt>2013-12-31 16:02:02</wp:postDateGmt><excerpt xsi:nil="true"/><wp:commentStatus>closed</wp:commentStatus><wp:pingStatus>closed</wp:pingStatus><wp:status>publish</wp:status><wp:postType>acf</wp:postType><wp:postName>acf_group-name</wp:postName><wp:postId xsi:nil="true"/><content:encoded xsi:nil="true"/><excerpt:encoded xsi:nil="true"/><wp:postmeta><wp:metaKey>position</wp:metaKey><wp:metaValue><![CDATA[normal]]></wp:metaValue></wp:postmeta><wp:postmeta><wp:metaKey>layout</wp:metaKey><wp:metaValue><![CDATA[default]]></wp:metaValue></wp:postmeta><wp:postmeta><wp:metaKey>hide_on_screen</wp:metaKey><wp:metaValue><![CDATA[]]></wp:metaValue></wp:postmeta><wp:postmeta><wp:metaKey>rule</wp:metaKey><wp:metaValue><![CDATA[a:5:{s:5:"param";s:9:"post_type";s:5:"value";s:4:"post";s:8:"operator";s:2:"==";s:8:"order_no";i:0;s:8:"group_no";i:0;}]]></wp:metaValue></wp:postmeta><wp:postmeta><wp:metaKey>10000000x</wp:metaKey><wp:metaValue><![CDATA[a:14:{s:3:"key";s:9:"10000000x";s:5:"label";s:7:"Field 1";s:4:"name";s:7:"field_1";s:4:"type";s:4:"text";s:8:"order_no";i:0;s:12:"instructions";s:0:"";s:8:"required";s:1:"0";s:17:"conditional_logic";a:3:{s:6:"status";s:1:"0";s:5:"rules";a:1:{i:0;a:3:{s:5:"field";s:4:"null";s:8:"operator";s:2:"==";s:5:"value";s:0:"";}}s:8:"allorany";s:3:"all";}s:13:"default_value";s:0:"";s:11:"placeholder";s:0:"";s:7:"prepend";s:0:"";s:6:"append";s:0:"";s:10:"formatting";s:4:"html";s:9:"maxlength";s:0:"";}]]></wp:metaValue></wp:postmeta><wp:postmeta><wp:metaKey>20000000x</wp:metaKey><wp:metaValue><![CDATA[a:14:{s:3:"key";s:9:"20000000x";s:5:"label";s:7:"Field 2";s:4:"name";s:7:"field_2";s:4:"type";s:4:"text";s:8:"order_no";i:1;s:12:"instructions";s:0:"";s:8:"required";s:1:"0";s:17:"conditional_logic";a:3:{s:6:"status";s:1:"0";s:5:"rules";a:1:{i:0;a:3:{s:5:"field";s:4:"null";s:8:"operator";s:2:"==";s:5:"value";s:0:"";}}s:8:"allorany";s:3:"all";}s:13:"default_value";s:0:"";s:11:"placeholder";s:0:"";s:7:"prepend";s:0:"";s:6:"append";s:0:"";s:10:"formatting";s:4:"html";s:9:"maxlength";s:0:"";}]]></wp:metaValue></wp:postmeta><wp:postmeta><wp:metaKey>30000000x</wp:metaKey><wp:metaValue><![CDATA[a:14:{s:3:"key";s:9:"30000000x";s:5:"label";s:7:"Field 3";s:4:"name";s:7:"field_3";s:4:"type";s:4:"text";s:8:"order_no";i:2;s:12:"instructions";s:0:"";s:8:"required";s:1:"0";s:17:"conditional_logic";a:3:{s:6:"status";s:1:"0";s:5:"rules";a:1:{i:0;a:3:{s:5:"field";s:4:"null";s:8:"operator";s:2:"==";s:5:"value";s:0:"";}}s:8:"allorany";s:3:"all";}s:13:"default_value";s:0:"";s:11:"placeholder";s:0:"";s:7:"prepend";s:0:"";s:6:"append";s:0:"";s:10:"formatting";s:4:"html";s:9:"maxlength";s:0:"";}]]></wp:metaValue></wp:postmeta></item></channel></rss>]
+		end
+		it "renders php correctly" do
+			# puts @static.to_php
+			expect(@static.to_php).to eq %Q[<?php get_header(); ?>\n\n		<section>\n\n			<?php if(have_posts()) : while(have_posts()) : the_post(); ?><!-- start loop -->\n				<article>\n\n					<?php $field_1 = get_field("field_1"); if ($field_1): ?>\n						<?php echo $field_1; ?>\n					<?php endif; ?>\n					<?php $field_2 = get_field("field_2"); if ($field_2): ?>\n						<?php echo $field_2; ?>\n					<?php endif; ?>\n					<?php $field_3 = get_field("field_3"); if ($field_3): ?>\n						<?php echo $field_3; ?>\n					<?php endif; ?>\n\n				</article>\n			<?php endwhile; endif; ?><!-- end loop -->\n\n		</section>\n\n		<?php //get_sidebar(); ?><!-- optional -->\n\n<?php get_footer(); ?>]
 		end
 	end
 end

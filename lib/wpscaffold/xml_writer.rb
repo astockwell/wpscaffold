@@ -12,7 +12,7 @@ module Wpscaffold
 
 		# Compiles XML output for import into wordpress
 		def render
-			creation_time = Time.new
+			creation_time = @options[:post_date] || Time.new
 			xml_header = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n<!-- generator=\"WordPress/3.7.1\" created=\"#{creation_time.gmtime.strftime("%Y-%m-%d %H:%M:%S")}\" -->\n"
 			xml_skel = {
 				:"rss" => {
@@ -43,7 +43,7 @@ module Wpscaffold
 		end
 
 		def item_skel(item)
-			post_date = Time.new
+			post_date = @options[:post_date] || Time.new
 			{
 				:'title!'            => "<![CDATA[#{item[:title]}]]>",
 				:'pubDate'           => post_date.gmtime.strftime("%a, %d %b %Y %H:%M:%S %z"),

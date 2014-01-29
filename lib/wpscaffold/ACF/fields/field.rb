@@ -12,7 +12,7 @@ module Wpscaffold
 				@label    = raw_field_name.titleize
 				@name     = raw_field_name.parameterize.underscore
 				@order_no = order_no
-				@key      = keygen
+				@key      = options[:key] || keygen
 
 				# Internal
 				@raw      = raw_field_name
