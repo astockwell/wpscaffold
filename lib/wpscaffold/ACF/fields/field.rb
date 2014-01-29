@@ -1,5 +1,4 @@
 require 'rubygems'
-require 'highline/import'
 require 'uuid'
 
 require 'wpscaffold'
@@ -10,14 +9,14 @@ module Wpscaffold
 			attr_accessor :label, :name, :order_no, :options, :key
 
 			def initialize(raw_field_name, order_no, options={})
-				@label     = raw_field_name.titleize
-				@name      = raw_field_name.parameterize.underscore
-				@order_no  = order_no
-				@key       = keygen
+				@label    = raw_field_name.titleize
+				@name     = raw_field_name.parameterize.underscore
+				@order_no = order_no
+				@key      = keygen
 
 				# Internal
-				@raw       = raw_field_name
-				@options   = options
+				@raw      = raw_field_name
+				@options  = options
 
 				# Bootstrap, save a lot of error checking
 				@options[:xml] = {} unless @options[:xml]

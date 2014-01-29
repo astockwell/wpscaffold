@@ -1,6 +1,7 @@
 require 'wpscaffold'
 
 require 'wpscaffold/ACF'
+require 'wpscaffold/Core'
 require 'wpscaffold/xml_writer'
 
 module Wpscaffold

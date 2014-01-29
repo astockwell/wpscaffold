@@ -8,8 +8,8 @@ describe Wpscaffold::XmlWriter do
 			Wpscaffold::ACF::TextField.new( "field 3", 2 ),
 		]
 		@field_group = Wpscaffold::ACF::FieldGroup.new( "Group Name", @fields )
-		@xml_empty = Wpscaffold::XmlWriter.new()
-		@xml_three = Wpscaffold::XmlWriter.new([@field_group])
+		@xml_empty   = Wpscaffold::XmlWriter.new()
+		@xml_three   = Wpscaffold::XmlWriter.new([@field_group])
 	end
 
 	describe '#new' do
@@ -21,7 +21,7 @@ describe Wpscaffold::XmlWriter do
 
 	describe '#render' do
 		it "renders all items to xml" do
-			pp @xml_empty.render
+			# pp @xml_empty.render
 			# pp @xml_three.render
 			expect(@xml_empty.render).to be_a String
 			expect(@xml_three.render).to be_a String
