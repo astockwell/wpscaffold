@@ -26,11 +26,11 @@ describe Wpscaffold::Core::Template::Static do
 			expect(@static.to_xml).to be_a Hash
 		end
 		it "contains the correct key/values" do
-			expect(@static.to_xml).to eq({:title=>"Page Name", :post_name=>"page_name", :post_type=>"page", :post_id=>nil, :content=>nil, :excerpt=>nil, :postmeta=>[{:"wp:meta_key"=>"_wp_page_template", :"wp:meta_value!"=>"<![CDATA[default]]>"}]})
+			expect(@static.to_xml).to eq({:title=>"Page Name", :post_name=>"page-name", :post_type=>"page", :post_id=>nil, :content=>nil, :excerpt=>nil, :postmeta=>[{:"wp:meta_key"=>"_wp_page_template", :"wp:meta_value!"=>"<![CDATA[default]]>"}]})
 		end
 		it "allows for the changing of values" do
 			static_t = Wpscaffold::Core.create_template "Static", "Page Name", fields: @field_group, content: "this is some content"
-			expect(static_t.to_xml).to eq({:title=>"Page Name", :post_name=>"page_name", :post_type=>"page", :post_id=>nil, :content=>"this is some content", :excerpt=>nil, :postmeta=>[{:"wp:meta_key"=>"_wp_page_template", :"wp:meta_value!"=>"<![CDATA[default]]>"}]})
+			expect(static_t.to_xml).to eq({:title=>"Page Name", :post_name=>"page-name", :post_type=>"page", :post_id=>nil, :content=>"this is some content", :excerpt=>nil, :postmeta=>[{:"wp:meta_key"=>"_wp_page_template", :"wp:meta_value!"=>"<![CDATA[default]]>"}]})
 		end
 	end
 end

@@ -4,19 +4,22 @@ module Wpscaffold
 	module Core
 		module Template
 			class Base
-				attr_accessor :title, :slug
+				attr_accessor :name, :options
 
-				def initialize(page_name, options={})
-					@title   = page_name.titleize
-					@slug    = page_name.parameterize.underscore
-
-					# Internal
+				def initialize(name, options={})
+					@name    = name
 					@options = options
-					@raw     = page_name
 				end
 
 				def filename
 					raise NotImplementedError
+				end
+
+				def to_file
+					{
+						filename: filename,
+						contents: to_php,
+					}
 				end
 
 				def to_php

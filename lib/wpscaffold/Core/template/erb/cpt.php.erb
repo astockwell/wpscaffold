@@ -1,8 +1,8 @@
 <?php
 
-function create_cpt_<%= name %>() {
-	$label_singular = '<%= name.titleize %>';
-	$label_plural = '<%= name.titleize.pluralize %>';
+function create_cpt_<%= @title[:underscore] %>() {
+	$label_singular = '<%= @title[:singular] %>';
+	$label_plural = '<%= @title[:plural] %>';
 
 	$labels = array(
 		'name' => __($label_plural),
@@ -25,7 +25,7 @@ function create_cpt_<%= name %>() {
 		'public' => true,
 		'has_archive' => true,
 		'hierarchical' => false,
-		// 'rewrite' => array( 'with_front' => false, 'slug' => '<%= name %>' ),
+		// 'rewrite' => array( 'with_front' => false, 'slug' => '<%= @title[:underscore] %>' ),
 		// 'show_in_menu' => true,
 		// 'menu_position' => 5,
 		'supports' => array(
@@ -42,6 +42,6 @@ function create_cpt_<%= name %>() {
 				'page-attributes'
 			)
 	);
-	register_post_type( '<%= name %>', $args ); // Singular! slug!
+	register_post_type( '<%= @title[:underscore] %>', $args ); // Singular! slug!
 }
-add_action( 'init', 'create_cpt_<%= name %>' );
+add_action( 'init', 'create_cpt_<%= @title[:underscore] %>' );

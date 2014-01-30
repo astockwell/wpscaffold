@@ -4,6 +4,12 @@ module Wpscaffold
 	module Core
 		module Template
 			class Static < Base
+				def initialize(name, options={})
+					super
+					@title = @name.titleize
+					@slug  = @name.parameterize
+				end
+
 				def filename
 					"page-#{@slug}.php"
 				end
