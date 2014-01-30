@@ -1,6 +1,7 @@
 require 'wpscaffold'
 
 require 'wpscaffold/Core/template/base'
+require 'wpscaffold/Core/template/archive'
 require 'wpscaffold/Core/template/static'
 require 'wpscaffold/Core/template/cpt'
 

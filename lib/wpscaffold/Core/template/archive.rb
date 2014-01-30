@@ -3,12 +3,13 @@ require 'wpscaffold'
 module Wpscaffold
 	module Core
 		module Template
-			class CPT < Base
+			class Archive < Base
 				def filename
-					"#{@title[:underscore]}.php"
+					"archive-#{@title[:underscore]}.php"
 				end
 
 				def to_php
+					@fields = prepare_template_fields
 					Tilt.new("#{erb_path}/#{class_name}.php.erb").render(self)
 				end
 

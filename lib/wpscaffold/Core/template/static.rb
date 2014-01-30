@@ -4,25 +4,19 @@ module Wpscaffold
 	module Core
 		module Template
 			class Static < Base
-				def initialize(name, options={})
-					super
-					@title = @name.titleize
-					@slug  = @name.parameterize
-				end
-
 				def filename
-					"page-#{@slug}.php"
+					"page-#{@title[:slug]}.php"
 				end
 
 				def to_php
-					@fields = @options[:fields] && @options[:fields].to_php + "\n" || default_post_fields
+					@fields = prepare_template_fields
 					Tilt.new("#{erb_path}/#{class_name}.php.erb").render(self)
 				end
 
 				def to_xml
 					{
-						title:     @title,
-						post_name: @slug,
+						title:     @title[:titleized],
+						post_name: @title[:slug],
 						post_type: @options[:post_type] || "page",
 						post_id:   @options[:post_id]   || nil,
 						content:   @options[:content]   || nil,

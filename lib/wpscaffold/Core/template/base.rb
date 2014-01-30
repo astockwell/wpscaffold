@@ -4,11 +4,17 @@ module Wpscaffold
 	module Core
 		module Template
 			class Base
-				attr_accessor :name, :options
+				attr_accessor :name, :options, :title
 
 				def initialize(name, options={})
-					@name    = name
-					@options = options
+					@name, @options = name, options
+					@title = {
+						titleized:  @name.titleize,
+						singular:   @name.titleize.singularize,
+						plural:     @name.titleize.pluralize,
+						slug:       @name.singularize.parameterize,
+						underscore: @name.singularize.parameterize.underscore,
+					}
 				end
 
 				def filename
@@ -42,6 +48,10 @@ module Wpscaffold
 
 				def erb_path
 					"lib/wpscaffold/Core/template/erb"
+				end
+
+				def prepare_template_fields
+					@options[:fields] && @options[:fields].to_php + "\n" || default_post_fields
 				end
 			end
 		end

@@ -5,15 +5,15 @@
 			<?php if(have_posts()) : while(have_posts()) : the_post(); ?><!-- start loop -->
 				<article>
 
-<%= fields.gsub(/^/) { |match| "\t\t\t\t\t" } %>
+<%= @fields.gsub(/^/) { |match| "\t\t\t\t\t" } %>
 
 				</article>
 			<?php endwhile; endif; ?><!-- end loop -->
 
 			<div class="pagination">
 				<?php $args = array(
-					'base'         => get_bloginfo('url') . '/<%= name %>/%_%',
-					'format'       => 'page/%#%/', //url format is "/<%= name %>/page/#"
+					'base'         => get_bloginfo('url') . '/<%= @title[:underscore] %>/%_%',
+					'format'       => 'page/%#%/', //url format is "/<%= @title[:underscore] %>/page/#"
 					'total'        => $wp_query->max_num_pages,
 					'current'      => max( 1, $wp_query->query_vars['paged'] ),
 					'show_all'     => true,

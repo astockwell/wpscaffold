@@ -15,6 +15,13 @@ describe Wpscaffold::Core::Template::Base do
 		it "stores the template option(s)" do
 			expect(@template.options).to eq({ option: "some option value" })
 		end
+		it "stores the template's title(s)" do
+			expect(@template.title.has_key? :titleized).to eq true
+			expect(@template.title.has_key? :singular).to eq true
+			expect(@template.title.has_key? :plural).to eq true
+			expect(@template.title.has_key? :slug).to eq true
+			expect(@template.title.has_key? :underscore).to eq true
+		end
 	end
 	describe '#filename' do
 		it "returns correct error" do
