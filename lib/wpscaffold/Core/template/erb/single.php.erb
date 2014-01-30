@@ -5,7 +5,7 @@
 			<?php if(have_posts()) : while(have_posts()) : the_post(); ?><!-- start loop -->
 				<article>
 
-<%= fields.gsub(/^/) { |match| "\t\t\t\t\t" } %>
+<%= @fields.gsub(/^/) { |match| "\t\t\t\t\t" } %>
 
 				</article>
 			<?php endwhile; endif; ?><!-- end loop -->
