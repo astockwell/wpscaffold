@@ -4,6 +4,10 @@ module Wpscaffold
 	module Core
 		module Template
 			class Archive < Base
+				def css_class
+					"post-type-archive-#{@title[:underscore]}"
+				end
+
 				def filename
 					"archive-#{@title[:underscore]}.php"
 				end

@@ -4,6 +4,10 @@ module Wpscaffold
 	module Core
 		module Template
 			class Static < Base
+				def css_class
+					"pagename-#{@title[:slug]}"
+				end
+
 				def filename
 					"page-#{@title[:slug]}.php"
 				end

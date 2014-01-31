@@ -17,6 +17,10 @@ module Wpscaffold
 					}
 				end
 
+				def css_class
+					raise NotImplementedError
+				end
+
 				def filename
 					raise NotImplementedError
 				end

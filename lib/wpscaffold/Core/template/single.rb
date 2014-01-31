@@ -4,6 +4,10 @@ module Wpscaffold
 	module Core
 		module Template
 			class Single < Base
+				def css_class
+					"single-#{@title[:underscore]}"
+				end
+
 				def filename
 					"single-#{@title[:underscore]}.php"
 				end

@@ -4,6 +4,10 @@ module Wpscaffold
 	module Core
 		module Template
 			class CPT < Base
+				def css_class
+					false
+				end
+
 				def filename
 					"#{@title[:underscore]}.php"
 				end
