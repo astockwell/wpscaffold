@@ -10,7 +10,7 @@ describe "Wpscaffold Integration Test" do
 				Wpscaffold::ACF::TextField.new( "field 3", 2, key: "30000000x" ),
 			]
 			@field_group = Wpscaffold::ACF::FieldGroup.new( "Group Name", @fields )
-			@static = Wpscaffold::Core.create_template "Static", "Page Name", fields: @field_group
+			@static = Wpscaffold::Core.create_template "Static", "Page Name", field_group: @field_group
 			@xml_three = Wpscaffold::XmlWriter.new([@static, @field_group], post_date: @time)
 		end
 		it "renders xml correctly" do

@@ -8,7 +8,7 @@ describe Wpscaffold::Core::Template::Static do
 			Wpscaffold::ACF::TextField.new( "field 3", 2 ),
 		]
 		@field_group = Wpscaffold::ACF::FieldGroup.new( "Group Name", @fields )
-		@static = Wpscaffold::Core.create_template "Static", "Page Name", fields: @field_group
+		@static = Wpscaffold::Core.create_template "Static", "Page Name", field_group: @field_group
 	end
 
 	describe '#to_php' do
@@ -29,7 +29,7 @@ describe Wpscaffold::Core::Template::Static do
 			expect(@static.to_xml).to eq({:title=>"Page Name", :post_name=>"page-name", :post_type=>"page", :post_id=>nil, :content=>nil, :excerpt=>nil, :postmeta=>[{:"wp:meta_key"=>"_wp_page_template", :"wp:meta_value!"=>"<![CDATA[default]]>"}]})
 		end
 		it "allows for the changing of values" do
-			static_t = Wpscaffold::Core.create_template "Static", "Page Name", fields: @field_group, content: "this is some content"
+			static_t = Wpscaffold::Core.create_template "Static", "Page Name", field_group: @field_group, content: "this is some content"
 			expect(static_t.to_xml).to eq({:title=>"Page Name", :post_name=>"page-name", :post_type=>"page", :post_id=>nil, :content=>"this is some content", :excerpt=>nil, :postmeta=>[{:"wp:meta_key"=>"_wp_page_template", :"wp:meta_value!"=>"<![CDATA[default]]>"}]})
 		end
 	end

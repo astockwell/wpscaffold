@@ -10,12 +10,19 @@ module Wpscaffold
 				# - [@options[:filepath]]* the destination filepath (required)
 				# - [@options[:filename]]* the destination filename (required)
 
-				def css_class
-					false
+				def filename
+					# "#{@options[:filepath]}/_#{@options[:filename]}.scss"
+					# "#{@name}.scss"
+					@name
 				end
 
-				def filename
-					"#{@options[:filepath]}/#{@options[:filename]}.scss"
+				def inserts
+					[
+						{
+							file:    "scss/screen.scss",
+							content: "@import #{@options[:filepath]}/#{@options[:filename]}"
+						}
+					]
 				end
 
 				alias_method :to_scss, :to_php

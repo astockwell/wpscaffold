@@ -8,7 +8,7 @@ describe Wpscaffold::Core::Template::Archive do
 			Wpscaffold::ACF::TextField.new( "field 3", 2 ),
 		]
 		@field_group = Wpscaffold::ACF::FieldGroup.new( "Group Name", @fields )
-		@archive = Wpscaffold::Core.create_template "Archive", "my post type", fields: @field_group
+		@archive = Wpscaffold::Core.create_template "Archive", "my post type", field_group: @field_group
 	end
 
 	describe '#to_php' do

@@ -18,11 +18,15 @@ module Wpscaffold
 				end
 
 				def css_class
-					raise NotImplementedError
+					false
 				end
 
 				def filename
 					raise NotImplementedError
+				end
+
+				def inserts
+					false
 				end
 
 				def to_file
@@ -55,7 +59,7 @@ module Wpscaffold
 				end
 
 				def prepare_template_fields
-					@options[:fields] && @options[:fields].to_php + "\n" || default_post_fields
+					@options[:field_group] && @options[:field_group].to_php + "\n" || default_post_fields
 				end
 			end
 		end

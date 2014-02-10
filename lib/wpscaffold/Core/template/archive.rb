@@ -8,6 +8,10 @@ module Wpscaffold
 					"post-type-archive-#{@title[:underscore]}"
 				end
 
+				def css_filename
+					File.join("archive", "_#{@title[:underscore]}.scss")
+				end
+
 				def filename
 					"archive-#{@title[:underscore]}.php"
 				end

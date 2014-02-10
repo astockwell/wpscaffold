@@ -8,7 +8,7 @@ describe Wpscaffold::Core::Template::Single do
 			Wpscaffold::ACF::TextField.new( "field 3", 2 ),
 		]
 		@field_group = Wpscaffold::ACF::FieldGroup.new( "Group Name", @fields )
-		@single = Wpscaffold::Core.create_template "Single", "my post type", fields: @field_group
+		@single = Wpscaffold::Core.create_template "Single", "my post type", field_group: @field_group
 	end
 
 	describe '#to_php' do

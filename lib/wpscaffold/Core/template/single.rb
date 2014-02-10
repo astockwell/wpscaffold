@@ -8,6 +8,10 @@ module Wpscaffold
 					"single-#{@title[:underscore]}"
 				end
 
+				def css_filename
+					File.join("single", "_#{@title[:underscore]}.scss")
+				end
+
 				def filename
 					"single-#{@title[:underscore]}.php"
 				end
