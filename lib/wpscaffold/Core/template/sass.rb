@@ -13,14 +13,14 @@ module Wpscaffold
 				def filename
 					# "#{@options[:filepath]}/_#{@options[:filename]}.scss"
 					# "#{@name}.scss"
-					@name
+					File.join("sass", @name)
 				end
 
 				def inserts
 					[
 						{
-							file:    "scss/screen.scss",
-							content: "@import #{@options[:filepath]}/#{@options[:filename]}"
+							filename: File.join( "sass", "screen.scss"),
+							contents: "@import \"#{@name}\";"
 						}
 					]
 				end

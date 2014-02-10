@@ -13,7 +13,7 @@ describe Wpscaffold::Builder do
 
 	describe 'self.cpt' do
 		it 'test' do
-			pp @cpt
+			# pp @cpt
 		end
 	end
 end

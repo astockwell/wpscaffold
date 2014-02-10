@@ -5,7 +5,7 @@ module Wpscaffold
 		module Template
 			class CPT < Base
 				def filename
-					"#{@title[:underscore]}.php"
+					File.join("lib", "cpts", "#{@title[:underscore]}.php")
 				end
 
 				def to_php
