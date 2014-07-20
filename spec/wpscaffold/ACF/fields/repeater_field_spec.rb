@@ -16,8 +16,8 @@ describe Wpscaffold::ACF::RepeaterField do
 		@r_field_with_sub = Wpscaffold::ACF::RField.new( "my repeater", 0, child_fields: @sub_repeater_field )
 		@r_field_without_sub = Wpscaffold::ACF::RField.new( "my repeater", 0, child_fields: [@text_field1,@text_field2,@text_field3,@image_field1] )
 		# Test factory
-		@factory_repeater_with_sub = Wpscaffold::ACF.create_field( "my repeater", :repeater, 0, child_fields: @sub_repeater_field )
-		@factory_repeater_without_sub = Wpscaffold::ACF.create_field( "my repeater", :repeater, 0, child_fields: [@text_field1,@text_field2,@text_field3,@image_field1] )
+		@factory_repeater_with_sub = Wpscaffold::ACF.create_field( :repeater, "my repeater", 0, child_fields: @sub_repeater_field )
+		@factory_repeater_without_sub = Wpscaffold::ACF.create_field( :repeater, "my repeater", 0, child_fields: [@text_field1,@text_field2,@text_field3,@image_field1] )
 		@fields = [
 			@repeater_field_without_sub,
 			@r_field_without_sub,

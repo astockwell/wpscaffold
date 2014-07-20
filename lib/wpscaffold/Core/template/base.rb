@@ -55,7 +55,7 @@ module Wpscaffold
 				end
 
 				def erb_path
-					"lib/wpscaffold/Core/template/erb"
+					File.join(File.dirname(__FILE__), "erb")
 				end
 
 				def prepare_template_fields

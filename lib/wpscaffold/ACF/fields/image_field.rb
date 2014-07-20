@@ -4,7 +4,7 @@ module Wpscaffold
 	module ACF
 		class ImageField < Field
 			def to_php(format=nil)
-%Q[<?php #{php_variable(format)} = #{get_field(format)}; if (#{php_variable(format)}): ?>
+%Q[<?php #{php_variable(format)} = #{get_field(format)}; if ( !empty(#{php_variable(format)}) ): ?>
 	<img src="<?php echo #{php_variable(format)}#{image_size}; ?>" alt="<?php echo #{php_variable(format)}["alt"]; ?>" title="<?php echo #{php_variable(format)}["title"]; ?>" />
 <?php endif; ?>]
 			end

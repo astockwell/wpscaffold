@@ -4,7 +4,7 @@ module Wpscaffold
 	module ACF
 		class TextField < Field
 			def to_php(format=nil)
-%Q[<?php #{php_variable(format)} = #{get_field(format)}; if (#{php_variable(format)}): ?>
+%Q[<?php #{php_variable(format)} = #{get_field(format)}; if ( !empty(#{php_variable(format)}) ): ?>
 	<?php echo #{php_variable(format)}; ?>
 <?php endif; ?>]
 			end

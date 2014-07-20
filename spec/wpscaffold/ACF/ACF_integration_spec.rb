@@ -3,9 +3,9 @@ require 'spec_helper'
 describe Wpscaffold::ACF do
 	describe 'integration test for ACF FieldGroup: flat' do
 		before :all do
-			@field_a = Wpscaffold::ACF.create_field( "title", :text, 0 )
-			@field_b = Wpscaffold::ACF.create_field( "description", :text, 1 )
-			@field_c = Wpscaffold::ACF.create_field( "author", :text, 2 )
+			@field_a = Wpscaffold::ACF.create_field( :text, "title", 0 )
+			@field_b = Wpscaffold::ACF.create_field( :text, "description", 1 )
+			@field_c = Wpscaffold::ACF.create_field( :text, "author", 2 )
 		end
 		let(:acf) { Wpscaffold::ACF::FieldGroup.new( "Field Group Name", [@field_a, @field_b, @field_c] ) }
 

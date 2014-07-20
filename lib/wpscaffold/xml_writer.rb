@@ -13,12 +13,12 @@ module Wpscaffold
 		# Compiles XML output for import into wordpress
 		def render
 			creation_time = @options[:post_date] || Time.new
-			xml_header = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n<!-- generator=\"WordPress/3.7.1\" created=\"#{creation_time.gmtime.strftime("%Y-%m-%d %H:%M:%S")}\" -->\n"
+			xml_header = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n<!-- generator=\"WordPress/3.8.1\" created=\"#{creation_time.gmtime.strftime("%Y-%m-%d %H:%M:%S")}\" -->\n"
 			xml_skel = {
 				:"rss" => {
 					:"channel" => {
 						:"pubDate"        => creation_time.gmtime.strftime("%a, %d %b %Y %H:%M:%S %z"),
-						:"wp:wxr_version" => "1.1",
+						:"wp:wxr_version" => "1.2",
 						:"item"           => prepare_items
 					},
 					:"@version"       => "2.0",
@@ -26,11 +26,11 @@ module Wpscaffold
 					:"@xmlns:content" => "http://purl.org/rss/1.0/modules/content/",
 					:"@xmlns:wfw"     => "http://wellformedweb.org/CommentAPI/",
 					:"@xmlns:dc"      => "http://purl.org/dc/elements/1.1/",
-					:"@xmlns:wp"      => "http://wordpress.org/export/1.1/"
+					:"@xmlns:wp"      => "http://wordpress.org/export/1.2/"
 				}
 			}
 
-			xml_header + Gyoku.xml(xml_skel)
+			xml_header + Gyoku.xml(xml_skel, { :key_converter => :none })
 		end
 
 		def prepare_items

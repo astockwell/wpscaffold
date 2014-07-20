@@ -7,7 +7,7 @@ module Wpscaffold
 	module ACF
 		class RepeaterField < Field
 			def to_php(format=nil)
-%Q[<?php #{php_variable(format)} = #{get_field(format)}; if (#{php_variable(format)}): ?>
+%Q[<?php #{php_variable(format)} = #{get_field(format)}; if ( !empty(#{php_variable(format)}) ): ?>
 	<?php foreach(#{php_variable(format)} as #{php_variable(format)}#{eacherator}): ?>
 
 #{child_fields_to_php}

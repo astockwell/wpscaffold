@@ -6,7 +6,7 @@ describe Wpscaffold::ACF::ImageField do
 		# Test class alias
 		@i_field = Wpscaffold::ACF::IField.new( "my image", 0, xml: { preview_size: "medium" } )
 		# Test factory
-		@image_from_factory = Wpscaffold::ACF.create_field( "my image", :image, 0, xml: { preview_size: "medium" } )
+		@image_from_factory = Wpscaffold::ACF.create_field( :image, "my image", 0, xml: { preview_size: "medium" } )
 	end
 
 	describe '#new' do
@@ -62,7 +62,7 @@ describe Wpscaffold::ACF::ImageField do
 			it "returns a template with the proper (modified) image size" do
 				image_field = Wpscaffold::ACF::ImageField.new( "my image", 0, image_size: 'this_size', xml: { preview_size: "medium" } )
 				i_field = Wpscaffold::ACF::IField.new( "my image", 0, image_size: 'this_size', xml: { preview_size: "medium" } )
-				image_from_factory = Wpscaffold::ACF.create_field( "my image", :image, 0, image_size: 'this_size', xml: { preview_size: "medium" } )
+				image_from_factory = Wpscaffold::ACF.create_field( :image, "my image", 0, image_size: 'this_size', xml: { preview_size: "medium" } )
 				expect(image_field.to_php).to include '$my_image["sizes"]["this_size"]'
 				expect(i_field.to_php).to include '$my_image["sizes"]["this_size"]'
 				expect(image_from_factory.to_php).to include '$my_image["sizes"]["this_size"]'

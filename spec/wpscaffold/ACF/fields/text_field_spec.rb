@@ -6,7 +6,7 @@ describe Wpscaffold::ACF::TextField do
 		# Test class alias
 		@t_field = Wpscaffold::ACF::TField.new( "name", 0, xml: { formatting: "crazy" } )
 		# Test factory
-		@text_from_factory = Wpscaffold::ACF.create_field( "name", :text, 0, xml: { formatting: "crazy" } )
+		@text_from_factory = Wpscaffold::ACF.create_field( :text, "name", 0, xml: { formatting: "crazy" } )
 	end
 
 	describe '#new' do

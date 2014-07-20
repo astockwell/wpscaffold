@@ -17,7 +17,7 @@ module Wpscaffold
 		class << self
 
 			# Create instances of correct fieldtypes
-			def create_field(field_name, field_type, order_no, options={})
+			def create_field(field_type, field_name, order_no, options={})
 				field_class_name = "#{field_type.to_s.capitalize}Field"
 				raise ArgumentError, "No fieldtype (#{field_class_name}) for (#{field_name}) exists or is defined." unless field_class = field_type_exists?(field_class_name)
 				field_class.new(field_name, order_no, options)
